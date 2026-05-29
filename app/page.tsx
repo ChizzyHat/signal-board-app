@@ -10,11 +10,13 @@ export default async function Home() {
     redirect('/login')
   }
 
-  const { data: config } = await supabase
+  const { data: config, error: configError } = await supabase
     .from('user_config')
     .select('*')
     .eq('user_id', user.id)
     .single()
+
+  //console.log('Config query result:', { config, error: configError, userId: user.id })
 
   return (
     <div className="min-h-screen bg-gray-950 text-white p-8">
